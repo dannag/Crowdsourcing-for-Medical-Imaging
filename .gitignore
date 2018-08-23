@@ -1,0 +1,93 @@
+# Based on https://github.com/github/gitignore/blob/master/TeX.gitignore
+
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+/*.log
+/sections/*.log
+*.lot
+*.fls
+*.out
+*.toc
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+## Auxiliary and intermediate files from other packages:
+
+# algorithms
+*.alg
+*.loa
+
+# amsthm
+*.thm
+
+# beamer
+*.nav
+*.snm
+*.vrb
+
+# glossaries
+*.acn
+*.acr
+*.glg
+*.glo
+*.gls
+
+# hyperref
+*.brf
+
+# listings
+*.lol
+
+# makeidx
+*.idx
+*.ilg
+*.ind
+*.ist
+
+# minitoc
+*.maf
+*.mtc
+*.mtc0
+
+# minted
+*.pyg
+
+# nomencl
+*.nlo
+
+# todonotes
+*.tdo
+
+# xindy
+*.xdy
+
+
+# For a good (conflict-free) team workflow, the generated documents (PDF, EPS, DVI)
+# should be excluded from version control. However, you as a student should be the
+# only one committing to your repo.
+# If collaboration is inteded, exclude /ausarbeitung/*.{pdf,eps,dvi} from version
+# control by uncommenting the following lines:
+/*.dvi
+/*.eps
+/*.pdf
+
+# custom
+code/*.asv
+.Rproj.user
+.Rhistory
+
+# Just a Mac thing
+.DS_Store
