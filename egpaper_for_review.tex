@@ -1,0 +1,586 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{wacv}
+\usepackage{comment}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%%%%
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+\usepackage{multirow}
+\usepackage{array}
+
+\usepackage{url}
+\newcommand{\accessedDate}{Aug.~2018}
+\newcommand{\urlfootnote}[1]{~\footnote{\url{#1} Accessed \accessedDate}}
+
+\newcommand{\matthias}[1]{\emph{\textcolor{blue}{Matthias: #1}}}
+\newcommand{\veronika}[1]{\emph{\textcolor{red}{Veronika: #1}}}
+
+
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+%\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+
+%\wacvfinalcopy % *** Uncomment this line for the final submission
+
+\def\wacvPaperID{} % *** Enter the wacv Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+\ifwacvfinal\pagestyle{empty}\fi
+\setcounter{page}{1}
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{Crowdsourcing in Medical Imaging Analysis: Challenges and Opportunities}
+% Authors at the same institution
+%\author{First Author \hspace{2cm} Second Author \\
+%Institution1\\
+%{\tt\small firstauthor@i1.org}
+%}
+% Authors at different institutions
+\author{Anonymous}
+
+\maketitle
+\ifwacvfinal\thispagestyle{empty}\fi
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+
+\end{abstract}
+
+%%%%%%%%% BODY TEXT
+% Alessandro & Danna
+\section{Introduction} 
+%%%% CONTEXT
+\begin{itemize}
+    \item Importance and applicability (through examples) of medical image analysis
+    \item Need of accurate analysis of medical image at scale
+    \item Challenge of availability of methods able to scale and apply to such diverse domains. Intuitively, human assessment cannot scale
+    \item Machine learning is a promising solution, but it still required
+    
+\end{itemize}
+
+
+%Numerous applications show how to accelerate the analysis of medical images with crowdsourcing. 
+% is published within isolated silos in different communities~\cite{} rather than together in a mainstream crowdsourcing community (e.g., HCOMP, CHI, CSCW).  We believe working with medical images yields unique challenges not fully addressed by existing principles and frameworks generated in the mainstream crowdsourcing communities.  Consequently, while there is a rich community focusing on crowdsourcing for medical images, each isolated group arguably is ``reinventing the wheel", independently discovering similar challenges when trying to develop solutions.  Here, we identify limitations of the broader existing crowdsourcing literature and infrastructures (e.g., tasks, systems, platforms) for this domain with the ultimate goal of inspiring new infrastructures that stimulate easier, greater use of crowdsourcing for medical imaging.  Our findings are summarized in Table~\ref{} and discussed below.
+
+
+Why crowdsourcing?
+\begin{itemize}
+    \item Critical infrastructure to enable algorithm development through the generation of large scale datasets (e.g. via either the annotation or curation of pre-existing data to derive more information, or through the generation of novel data through collecting data from the crowd)
+    \item Address shortages of experts/draw together the collective effort of multiple experts
+    \item New opportunities to involve the crowd in healthcare are emerging with novel technologies e.g. pervasive internet connectivity and mobile phone technologies don't just enable the crowd sourcing of medical task but also allow new forms of data collection (and the dissemination of findings in potentially useful ways). Multiple benefits to engaging the crowd in healthcare beyond data generation e.g. engagement of diverse communities in authentic research/increase in scientific literacy etc.
+\end{itemize}
+
+Goals:
+\begin{itemize}
+    \item a set of pragmatic design considerations to guide design and motivate research in this field.
+\end{itemize} 
+
+Assumptions:
+\begin{itemize}
+    \item Single-truth tasks rather than creative brainstorming
+    \item Not real-time
+    \item Can be used for human computation and creativity
+\end{itemize} 
+% Exceptional cases are interesting ones that require the development of new infrastructure
+
+Affected stakeholders:
+\begin{itemize}
+    \item Crowd-perspective
+    \item Requester (System designer)
+    \item Patient perspective
+    \item Platform provider
+\end{itemize}
+
+\section{Related Works}
+\paragraph{Survey Papers}
+\begin{itemize}
+\item \cite{kittur2013future}: only focuses on worker and requester; no consideration of who data belongs to 
+\end{itemize}
+
+\paragraph{Medical Imaging Crowdsourcing Tasks}
+\begin{itemize}
+\item 
+\end{itemize}
+
+\paragraph{Existing Crowdsourcing Systems}
+Current crowdsourcing platforms can be categorized into crowd providers, aggregator platforms, and specialized platforms~\cite{hossfeld2014best}. %perhaps describe each of these in turn, in the same order as here - H
+Crowd providers like Amazon Mechanical Turk (AMT)\urlfootnote{https://mturk.com}, Microworkers\urlfootnote{https://https://microworkers.com}, or the non-commercial Zooniverse\urlfootnote{https://https://zooniverse.org}~\cite{simpson2014zooniverse} offer frameworks to easily access a large labor force. These frameworks often include reputation systems %clarify whether for requestors and/or workers - H
+and, in commercial applications, also means to handle remuneration. In contrast to specialized platforms that only focus on a specific use-case or a particular type of participant, like Streetspotr\urlfootnote{https://streetspotr.com/de/} or PatientsLikeMe~\cite{frost2008social}, crowd providers enable the crowdsourcing of arbitrary tasks to an open crowd. Aggregator platforms can be considered as a third type of crowdsourcing platform, with examples including Figure~8\urlfootnote{https://www.figure-eight.com} (formerly Crowdflower) or Cloudfactory\urlfootnote{https://www.cloudfactory.com}. Unlike crowd providers, these platforms usually do not maintain their own large crowd. However, they provide a unified interface to several crowd providers who act as subcontractors. Aggregator platforms also often provide unified workflows that can be enriched with automatic processes.
+
+For the domain of crowdsourced evaluation of medical images, all three types of platforms are of relevance. As we will show in Section 4, the evaluation of medical imaging can require highly trained individuals and experts, a crowd that exhibits a specific diversity, or just a massive amount of workforce contributing human judgments. Also, the number of tasks to solve can vary from a small number of judgments to a massive amount of data that needs to be annotated. Depending on the requirements of the specific task, a crowd provider, an aggregator, or a specialized platform might be most appropriate. 
+
+However, even if current crowdsourcing platforms are already operating (commercially) successful, they are often not well designed for the needs of academic research in general~\cite{hirth2017crowdsourcing} and medical imaging in particular. For example, identifying single (medical) expert users in huge crowds or the handling of privacy critical medical content and information are still open challenges. % not sure if this fits here - H
+
+%Routes to engaging and motivating volunteers:
+%Gamification, paid, versus volunteering.
+ 
+ 
+ % where does this section fit in? does it fit in here? -M
+\paragraph{Ethics of Training AI Systems}
+\begin{itemize}
+
+\item Privacy, data protection
+% - special care for handling/sensitive patient data -M
+% - related - the generation of AI systems that can identify otherwise unknown sensitive information e.g. whether or not you have a certain condition. The ramifications of this may vary in relation to whether a person lives in a country with a nationalized healthcare system or is reliant on insurance - H
+
+\item Fair sharing the products of crowdsourced efforts e.g. annotated data, collected data, algorithms and apps (particularly relevant when volunteer effort is being used)
+
+\item Training Set Bias: training sets should represent target group \textit{e.g.} gender, ethnicity, age and not propagate user bias. For example, gender bias in training sets \cite{zhao2017trainingsetbiastext, hendricks2018trainingbiasimage} was subsequently amplified in models trained on these datasets. Ignoring training set bias could can have serious consequences for machine based treatment research, comparable to \textit{e.g.} the current problem of gender bias in heart disease research (and medical research more generally)
+
+\item Algorithm Transparency: should users have to right to know the underlying process in a black box decision making algorithm\cite{olhede2017fairness}?
+% - e.g. black box systems spewing out an answer.. whats the underlying decision process? But is this relevant to training per se? -M
+% May be important for both the experts (and patients?) to understand both the process and the results produced by such algorithms, in order to understand their limitations and shortcomings
+
+\end{itemize}
+
+\section{What is a Medical Image?}
+Guiding surveys include \cite{litjens2017survey} %VC: This is a survey on deep learning in medical imaging, but they do have a list of different types of applications
+
+\begin{itemize}
+    \item Used for a medical purpose (not what is collected in an airport)
+    \item Not determined by imaging modality
+    \item Mental versus physical health 
+    \item Images used for diagnosis
+    \item Images used for treatment
+    \item Images used for basic science research that translates to improving human health
+    \item Images from human versus model systems (e.g. animal models) versus synthetic
+    \item Produced by direct versus indirect observation
+\end{itemize}
+
+Use cases:
+\begin{itemize}
+    \item PatientsLikeMe: people crowdsource their data and knowledge to share and find answers 
+    \item Mobile phone application to take pictures to detect melanoma  (image classification); gamification
+    \item Subjective rating of aesthetics for head deformation (image classification)
+    \item Braindr (segmentation) 
+    \item Where are my body organs? (Zooniverse): example of a data collection project via image annotation (assays level of individual medical knowledge through marking of a body illustration)
+\end{itemize}
+
+
+%%%%%%=======DIMENSIONS TABLE ALE WORKING OFFLINE=========
+
+\begin{table*}
+    \small
+    \centering
+%\resizebox{1\textwidth}{!}{
+    \begin{tabular}{lm{75px}m{320px}}
+    \toprule
+		\textbf{Feature} & \textbf{Value} & \textbf{Description} \\ \midrule
+		\multirow{7}{*}{\textbf{Worker Types}}	& \textit{Online Crowd} & Workers on micro-task platforms such as AMT and Figure~8 \\ \cline{2-3}
+									 	& \textit{Pro-amateurs} & Individuals with non-professional knowledge of the targeted medical domain (e.g. former patients, users of Web fora) \\	\cline{2-3}
+									 	& \textit{Experts} & Doctors and medical professionals. \\	\cline{2-3}																& \textit{Patients} & Individuals currently subject to medical care. \\	\cline{2-3}	
+									 	& \textit{Caregivers} & Individuals directly related to patients (e.g. relatives).\\ \cline{2-3}		
+									 	& \textit{Students} & Students of medical disciplines. \\	\cline{2-3}																& \textit{Non-humans} & Animals trained to analyse medical images. for example \cite{levenson2015pigeons}  \\
+		\midrule
+		\multirow{3}{*}{\textbf{Worker Unit}}		& \textit{Individuals} & Work performed by individuals in isolation. \\ \cline{2-3}
+									 	& \textit{Teams} & Work collaboratively performed by small teams assembled for a specific purpose. \\	\cline{2-3}
+									 	& \textit{Communities} & Work performed by self-organised groups (e.g. StackOverflow)  \\
+		\midrule
+		\multirow{8}{*}{\textbf{Incentives}}		& \textit{Money} & Traditional financial incentives (e.g. piece-wise reward and bonus) \\ \cline{2-3}
+									 	& \textit{Recognition} & Social standing among peers, due to good task performance (e.g. reputation) \\	\cline{2-3}
+									 	& \textit{Enjoyment} &   Participation driven by need for enjoyable and entertaining activities.\\	\cline{2-3}																& \textit{Access} & Motivation that is driven by one's need to obtain resources or knowledge that would be otherwise unaccessible.\\	\cline{2-3}	
+									 	& \textit{Learning} &  Drive to accomplish a targeted goal associated to personal growth trough education. \\ \cline{2-3}		
+									 	& \textit{Help Individual} & Drive to help a specific patient, mostly due to personal connections. \\\cline{2-3}									
+										& \textit{Help Group} & Drive to help a specific population of patients (e.g. kids, people affected by rare diseases), mostly due to personal experience. \\ \cline{2-3}									
+									 	& \textit{Help All} & Drive to help for greater good.   \\
+		\midrule		 
+		\multirow{4}{*}{\textbf{Task Meta-Type}}	& \textit{Data Provision} & Collection of medical image data, mostly from individuals willing to donate them.\\ \cline{2-3}
+									 	& \textit{Meta-data Provision} & Analysis and description of medical images for meta-data creation purposes. \\	\cline{2-3}
+									 	& \textit{Verification} & Analysis of existing meta-data for control and validation purposes. \\	\cline{2-3}									
+									 	& \textit{Consolidation} & Pre-processing of content for cleaning and alignment purposes (e.g. cropping, rotation, color correction)  \\
+		\midrule		 
+		\multirow{2}{*}{\textbf{Task Output}}		& \textit{Objective} & Task addressing properties that are directly observable and measurable, and that are holding a unique correct value (truth). \\ \cline{2-3}
+									 	& \textit{Subjective} & Task addressing properties that are described from the point of view of the worker, including: feelings, perceptions, opinions, and aesthetic judgements. \\	
+		\midrule		 
+		\multirow{2}{*}{\textbf{Task Granularity}}	& \textit{Micro-task} & Tasks amenable to decomposition and aggregation, and that typically require little time for execution.\\ \cline{2-3}
+									 	& \textit{Macro-task} & Tasks that may require many hours of work, and are not easily amenable to decomposition aggregation (e.g. synthesis of medical result, diagnosis). \\											
+		\midrule	
+		\multirow{7}{*}{\textbf{Quality Control}}	& \textit{Aggregation} & Combination of several (independent) submissions of different workers. \\ \cline{2-3}
+									 	& \textit{Worker Quality} & Also gold questions \\	\cline{2-3}
+									 	& \textit{Content Quality} & \texttt{DESC} \\	\cline{2-3}		
+									 	& \textit{Task Quality} & \texttt{DESC} \\	\cline{2-3}
+									 	& \textit{Control Process} & \texttt{DESC} \\ \cline{2-3}	
+									 	& \textit{Training} & Methods to increase the skill set of the workers required for the specific tasks. \\\cline{2-3}	
+									 	& \textit{Workflows} & Combination of different human- and machine steps to increase the quality of the final outcome. \\					
+									 	
+									 	\midrule	
+		\multirow{2}{*}{\textbf{Task Assignment}}	& \textit{Allocation Strategy} & Tasks could be selected by workers (\emph{pull} strategy, as in AMT) or automatically assigned (\emph{push} strategy)  \\ \cline{2-3}
+									 	& \textit{Dynamicity} & \texttt{DESC} \\	
+													
+
+    \bottomrule
+    \end{tabular}
+%    }
+    \caption{CAPTION}
+    \label{tab:stats}
+\end{table*}
+
+%%%%%%=======DIMENSIONS TABLE=========
+
+
+
+\section{Crowdsourcing Re-examined for Medical Imaging}
+Much of the crowdsourcing research involving medical images is published within isolated silos in different communities~\cite{} rather than together in a mainstream crowdsourcing community (e.g., HCOMP, CHI, CSCW).  We believe working with medical images yields unique challenges not fully addressed by existing principles and frameworks generated in the mainstream crowdsourcing communities.  Consequently, while there is a rich community focusing on crowdsourcing for medical images, each isolated group arguably is ``reinventing the wheel", independently discovering similar challenges when trying to develop solutions.  Here, we identify limitations of the broader existing crowdsourcing literature and infrastructures (e.g., tasks, systems, platforms) for this domain with the ultimate goal of inspiring new infrastructures that stimulate easier, greater use of crowdsourcing for medical imaging.  Our findings are summarized in Table~\ref{} and discussed below.
+
+% Helen
+\subsection{Worker Types: Who is the Crowd?}
+Crowdsourcing has traditionally been defined as "the act of a company or institution taking a function once performed by employees and outsourcing it to an undefined (and generally large) network of people in the form of an open call" \cite{howe2006rise}. These crowds can take many forms, varying by characteristics such as skill, motivation, personality and expertise level \cite{Kazai:2011:WTP:2063576.2063860, vuurens2011much, ross2010crowdworkers}. Therefore, a critical question when using a crowdsourcing approach is ’Who is the crowd?’, as different communities can be associated with different competencies and challenges which have the potential to impact the output.
+
+In crowdsourced medical image analysis, the question of ‘Who is the crowd?’ is particularly important as the type of crowd may fundamentally influence the research question that can be addressed. For example, a researcher may wish to crowdsource image annotation or data collection from a population with a specific medical condition, or conversely, may wish to avoid local search bias and instead access a much broader demographic range online (for example, see our case study project ‘Where are my body organs?’, section XXX). Features of the data itself may also inform decisions regarding the most appropriate crowd, for example, if the data contains graphic images, as is often the case with medical images, it may be inappropriate to engage with a crowd that could include children, as seen on online volunteering communities such as The Zooniverse.
+
+Crowdsourced medical image analysis is associated with a number of unique Worker Types, including patients and caregivers as detailed in Table~\ref{tab:stats}. Researchers should be mindful of the unique opportunities and challenges associated with working with these crowd segments. For example, patients and caregivers can contribute to the development of novel data sets (via data collection) and provide unique insights able to inform healthcare policy and research agendas. Patients and caregivers may also have a high level of knowledge about a specific condition that could be applied via ‘nichesourcing’ – the crowdsourcing of complex tasks to a small crowd of amateur-experts \cite{de2012nichesourcing}. Further, it may be assumed that these groups would have a high intrinsic motivation to contribute to research focused on their own medical conditions (see Motivations section). However there are challenges to working with patient and caregiver communities, for example, patients may be unable to provide informed consent dependent on their condition (e.g. if unconscious or suffering from dementia) or if they are a child, and caregivers may consider it insensitive to ask for their assistance whilst they are caring for an unwell loved one.
+
+The principal Expert Worker Types in crowdsourced medical image analysis include healthcare professionals such as Doctors and Nurses. As primary stakeholders in the algorithms that may be produced through crowdsourced effort, these experts may bring unique motivations and demotivations to crowdsourced medical image analysis. As potential beneficiaries of the technology produced, healthcare professionals may be highly motivated to contribute to crowdsourced medical image analysis. However, the perceived benefit of such ‘disruptive technology’ may be vary, from being viewed as positively contributing to a more efficient healthcare system through to negatively replacing a skilled workforce, which may influence motivation to contribute. Expert contributions in the medical domain may also be influenced by practical factors such as the limited amount of spare time available to this community, therefore, if an expert crowd is required (e.g. for Quality Control, see section X) researchers will need to carefully consider how they will engage with and motivate this community (see motivations section XXX).
+
+As with other crowdsourcing domains, non-expert communities can also be applied in crowdsourced medical image analysis. However, the lack of former knowledge or training may be of greater concern in medicine compared to other crowdsourcing domains – as the potential consequences of a poorly labelled medical data set (which may be used to subsequently produce a diagnostic algorithm, for instance) is arguable far greater. Therefore, when engaging non-experts researchers working in crowdsourced medical image analysis will need to consider the appropriateness of the task and ensure stringent data quality control procedures are implemented (see section XXX). Conversely, the lack of former knowledge in non-expert communities may provide opportunities to crowdsourced medical image analysis. Non-experts, by nature of their lack of former training, do not have the pre-existing biases that may be found in expert communities, and therefore would be less likely to avoid pitfalls of confirmation bias, overcome ‘groupthink’, and may be more likely to identify serendipitous discoveries through noticing what others do not. 
+
+% Ioanna & Panos
+\subsection{Worker Unit}
+\emph{Motivation:} 
+
+\emph{Traditional approach:}
+
+\emph{Related works for teams with a little explanation}
+
+\cite{Anagnostopoulos2012}
+
+\cite{BalkesenATO13}
+
+Efficient crowd teams are not only a matter of combining complementary skills, or availability, etc., but also human factors like personality. In~\cite{Lykourentzou:2016:PMB:2818048.2819979} the authors show that balanced, personality-wise teams perform better on collaborative complex tasks. 
+
+It is also important not only to place people together based on pre-measured individual traits, like skills or personality, but also to take their own opinion on whether they would like with someone or not, i.e. based on team dynamics. In~\cite{Lykourentzou:2017:TDL:2998181.2998322} use rapid peer interactions (``team dating") to gather worker-to-worker evaluations and then use these with an optimization algorithm to create efficient teams.
+
+
+
+\emph{Challenges for traditional approach from medical images:}
+
+\emph{Suggestions:}
+
+
+% Javed & Matthias
+\subsection{Crowdsourcing Motivations (Incentives)}
+\emph{Motivation:} 
+
+\emph{Traditional approach:}
+
+\emph{Challenges for traditional approach from medical images:}
+
+\emph{Suggestions:}
+
+How to employ or adapt existing platforms to support annotating medical images?
+\begin{itemize}
+    \item Pay: people may be uncomfortable and not know how to handle unfamiliar data; 
+    \item Altruism (e.g., Citizen Science): engage more people who are affected/interested in the problem; do meaningful work
+    \item Enjoyment (e.g., Gamification): That of course raises a question that gets people to do things.  Will it be effective in this domain?  Perhaps when it reveals you as an expert in a domain.  Less homogenous appeal to different types of users.  However, could be perceived insensitive/awkward to have ``fun" on data that is so related to suffering/death (privacy differs somewhat); also: what does it mean when we/family/friends know who the data belongs to?  
+    \item Personal Incentive: OpenHumans, PatientsLikeMe; existing literature does NOT address this motivation
+\end{itemize}
+Distinctions of medical imaging.
+\begin{itemize}
+    \item  Huge potential for distinct motivations from prior work (personal drivers versus global ethics; how to incentivize?)
+    \item What types of crowds would you want? 
+    % May need different types of crowd dependent on the research question being asked e.g. in the crowdsourcing medical image domain, the crowd may be the subject of analysis - therefore may want to consider how different motivators will be more or less engaging with different communities/the types of communities cultivated by employing different motivations and modes of engagement. The approach taken can influence the community, which may impact the research conducted (see discussion of http://delivery.acm.org/10.1145/3190000/3186945/p93-spiers.pdf?ip=82.132.236.243&id=3186945&acc=OPEN&key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E6D218144511F3437&__acm__=1532386677_319893bb75d55f4ee5aca4646fd5b0fa)- H
+    % May be worth thinking about how the type of data included in medical projects is different from other domains and how this may influence willingness of different communities to participate - e.g. medical data tends to be less charming than ecology or astronomy projects (would also be interesting to think abut whether serendipitous findings are less likely in medical projects - e.g. unusual events less common in the data/crowd less likely to identify them?) - H
+    % Medical domain could also differ from other the domains due to the perceived relative importance of the task being conducted e.g. curing cancer, vs counting penguins - potentially resulting in different motivations to participate - H
+    \item What types of crowds would be attracted?
+
+\end{itemize}
+Community you have access to is determined by which incentive you choose.  Need a way to ensure needed work will be completed.  If you really want to go commercial (or scale), need people who can be relied on and so have a paid option.  
+
+\subsection{Tasks}
+\begin{itemize}
+    \item Data collection; e.g., PatientsLikeMe, people uploading images taken with their phones
+    \item Data annotation
+\end{itemize}
+
+% Javed & Matthias
+\subsection{Task Meta-Type}
+\emph{Motivation:} 
+
+\emph{Traditional approach:}
+
+\emph{Challenges for traditional approach from medical images:}
+
+\emph{Suggestions:}
+
+% Matthias & Veronika
+\subsection{Task Output}
+\emph{Motivation:} 
+
+\emph{Traditional approach:}
+\begin{itemize}
+    \item Content identification and classification
+    \item Subjective ratings (Video \& Audio QoE)
+\end{itemize}
+
+\emph{Challenges for traditional approach from medical images:}
+\begin{itemize}
+    \item Subjective ratings are always affected by the rater bias ( cite QoE literature). However, this might be even stronger for medical data due to: 
+        \begin{itemize}
+            \item nature of the content
+            \item raters might be directly related/involved in medical treatment
+        \end{itemize}
+    \item Combined 'Task Outputs' possible and reasonable for medical tasks, e.g., collection of physical condition (heart rate, pulse, etc. ) and the perceived 'feeling' of the patient
+\end{itemize}
+
+
+\emph{Suggestions:}
+
+
+
+% Anisha, Ioanna, Panos
+\subsection{Task Granularity}
+\emph{Motivation:} 
+
+\emph{Traditional approach:}
+Macrotasks\cite{Haas2015}
+
+\emph{Task Decomposition (Anisha, Ioanna, Panos)} 
+% Paragraph 1: Motivation for task design, traditional crowdsourcing principles
+
+%1. task design/decomposition is important because (relate to reasons in QC section above)
+%2. the approach to task design in traditional crowdsourcing is to determine whether the task is optimally suited as a microtask or macrotask
+%3. Macrotasks (large, require more time, training, etc) vs. Microtasks (small, less specialized, resilient to interruptions, slower, requires larger workflows to ensure quality) 
+%macrotask: more worker time & subjective evaluation, lots of knowledge domains involved
+%- nondecomposabl
+%microtasks in TC do not require domain knowledge & context. 
+In traditional crowdsourcing, tasks are categorized and distributed to the crowd either as microtasks or macrotasks. Whether a task belongs to the micro- or macro- category depends on the characteristics of the problem it involves. 
+
+\subsubsection{Understanding the problem that the crowd should solve}
+Broadly speaking, a knowledge problem has three attributes: i) complexity, ii) decomposability and iii) structure~\cite{SchmitzLykourentzou2018}. \textit{Complexity} measures the number of knowledge/expertise domains the problem involves, and the degree of interdependencies among them~\cite{Nickerson2004}. A simple problem involves very few knowledge/expertise domains, with a low degree of interdependencies among them.  On the other hand, a complex problem involves multiple expertise domains, with a high in-between number of knowledge interactions. \textit{Decomposability}, measures the extent to which the problem can be divided into sub-problems. A decomposable problem can be divided into distinct sub-problems, each of which can be solved independently and using specific and distinct knowledge sets. On the other hand, a non-decomposable problem cannot be further sub-divided into smaller problems, because the interactions among the knowledge domains it involves are so extensive it is impractical to split it; the solution for such a problem has to be discovered as a whole. Finally, ~\textit{structure} measures whether there are clear boundaries between the relevant knowledge domains of the problem~\cite{Holden2016}. Well-structured problems are those for which there are explicit and widely accepted approaches to solve, because the relevant knowledge domains and the interactions among them are thoroughly understood. Ill-structured problems on the other hand are those for which the relevant knowledge domains are not known a priori and the interactions among them are poorly understood; for these problems there is no clear approach on how to solve them and they can often benefit from what is called the “non-typical expert”, i.e. serendipitous discovery. 
+
+\subsubsection{Defining the task type and workflow}
+After understanding the type of problem one wants to solve, one can then define the type of task that is best suited to solve this problem, as well as the workflow that can be used to solve it. \textit{Microtasks} are large collections of similar small chunks of work, each of which can be distributed in parallel to multiple crowd workers, accomplished individually (no interaction among the workers), and can usually be completed within a short time frame (seconds or minutes). Ground truth for microtasks can be usually objectively determined, if an adequately large number of people is employed to work on the microtask. As soon as the answer for each microtask is acquired, then the final answer to the overall task can be acquired by simple means of automatic aggregation of the separate microtask answers. Due to their structure, microtasks are mostly used to solve problems that are non-complex, decomposable and well-structured. Examples include: \textcolor{red}{to add@Panos,Ioanna}. \textit{Macrotasks} on the other hand are used to address work that is complex and requires multiple interconnected domains. They have been used in the past to tackle decomposable or non-decomposable problems, well- or ill-structured ones. Examples include: \textcolor{red}{to add@Panos,Ioanna}.
+
+\emph{Challenges for traditional approach from medical images:}
+
+\emph{Suggestions:}
+
+
+
+\subsubsection{Refining for the medical imaging domain}
+% Paragraph 2: Diff bwtn Medical imaging (MI) and traditional crowdsourcing (TC) is that complexity is overall higher, shifting most traditional microtasks to macrotasks
+4. In medical imaging (MI), what in traditional crowdsourcing (TC) is considered "micro" can be actually closer to "macro" on the spectrum
+  - for example: a binary classification = objective ground truth: "hot dog vs no hot dog" is very different from "cancer versus not cancer". 
+    - maybe the decision isn't immediately apparent even for experts = ground truth
+    - making the decision requires more context:
+      - image exploration: looking at different planes, oblique planes, overlaying different modalities, adjusting window/leveling 
+      - properties outside of the image, ex. patient age, symptoms, etc
+  - another example: a medium complex task like semantic segmentation (tracing a dog versus tracing a tumor) is shifted up in MI
+    - in MI, a pixel can correspond to a real world measurement (1 px == 1 mm) 
+      - pixel level accuracy may be crucial in some contexts, like measuring tumor growth
+      - it could be that non-experts are better at this because its an unfamiliar task (cite Danna's paper). mental block that it might be advantageous to crowdsource this
+    - borders are subjective even among experts, so quality control is more challenging
+  - another barrier is that people imagine microtasks can't be done, but evidence shows otherwise
+
+% Paragraph 3: Suggestions/How to approach complex MI micro/macro tasks   
+5. In TC, one successful strategy in training unskilled workers in complex tasks is to provide many gold-standard examples.  % ref: https://dl.acm.org/citation.cfm?id=2858268
+  - in MI, this is important:
+    - worker needs to understand difference between normal anatomic variability versus pathological
+    - worker needs to understand difference between a signal that originates from pathology versus an artifact of image acquisition
+  - but in MI might not be possible to provide a large number of examples
+6. Possible solutions - MI annotation in particular may need to rely on: 
+  - computer aided/semi-automated techniques in order to simplify task complexity
+    - e.g. region growing, precomputed superpixels (eyewire), etc. 
+  - a multi-staged approach mediated by a medical expert
+    - e.g semantic segmentation of multiple scleroris lesions might be broken into:
+      1. candidate selection
+
+
+
+
+% In crowdsourcing, two main strategies are:
+% source https://www.microsoft.com/en-us/research/publication/break-it-down-a-comparison-of-macro-and-microtasks/
+%\begin{itemize}
+%    \item Macrotasks
+%    \begin{itemize}
+%        \item Take longer, requires expertise generally
+%        \item not resilient to interruptions
+%        \item can be overwhelming to non-experts
+%    \end{itemize}
+%    \item Microtasks
+%    \begin{itemize}
+%        \item Advantages: Better quality data
+%        \item Disadvantages: Longer task completion time, might be really difficult to break down certain tasks in medical imaging
+%    \end{itemize}
+
+% Toward a Learning Science for Complex Crowdsourcing Tasks: https://dl.acm.org/citation.cfm?id=2858268 
+%In "Toward a Learning Science for Complex Crowdsourcing Tasks":
+%    \begin{itemize}
+%        \item Providing expert examples 
+%        \item if they don't exist, the crowd can correct each other
+%    \end{itemize}
+    
+%\end{itemize}
+
+% https://www.researchgate.net/publication/235335083_Ground_truth_generation_in_medical_imaging_A_crowdsourcing_based_iterative_approach 
+
+%In "Ground truth generation in medical imaging: A crowdsourcing based iterative approach" (2012)
+
+%\begin{itemize}
+%    \item this study compared results from 1 MD versus several domain %experts (??)
+%    \item task: modality classification
+%\end{itemize}
+
+%- what is it that doctors do? 
+%- there is more contextual
+%- medical domain: probably commonly must rely on someone else and figure out how to extract requirements
+
+%- crowdsourcing community: not the case that you must find a domain expert to shadow/study
+%- crowdsourcing community: 
+
+% Danna & Matthias & Veronika
+\subsection{Quality Control}
+\emph{Motivation:} Ensuring the work of the crowd can be trusted is a well-studied challenge in the crowdsourcing community~\cite{daniel2018quality}.  
+
+\emph{Traditional approach:}
+
+Classical techniques often rely on some form of \emph{aggregation}, resolving how to maximize the chance for a good output using differing weighting schemes to combine results from multiple crowd workers. \veronika{Describe some common techniques for aggregation, e.g. simple aggregation with voting vs assigning weights to raters (global weight)}. 
+
+Alternatively, many techniques help judge \emph{worker quality} towards helping uncover the best-fitting workers for each task. (Local weight per rater/task) The common approach of to employ gold questions.
+
+Preselection of workers (like approval rate from previous tasks) - can describe here what typical recommendations are
+
+\veronika{What is content quality, task quality?}
+
+\emph{Control Process}:
+\begin{itemize}
+    \item Screening of worker behavior,e.g., measuring completion time, monitoring interactions with the task interface\cite{hirth2014predicting, kazai2016quality, mok2017detecting, goyal2018your}
+    \item Consistency checks, attention tests, variable amount of work (Gardlo), trap questions
+\end{itemize}
+
+
+\emph{Workflows}
+\begin{itemize}
+    \item Crowdsourcing workflows (find-fix-verify)
+    \item Statistical post-processing/reliability checks
+    \item two-stage design
+    \item adaptive learning
+\end{itemize}
+
+
+Probably good to mention active learning here
+
+%http://www.programthecrowd.com/schedule
+
+\emph{Challenges for traditional approach from medical images:} 
+
+A common challenge is that it the expertise of the crowd is likely different from experts. Traditional approaches are still often used with good results, for example using majority vote to decide on a consensus segmentation of abnormalities in lung images~\cite{oneil2017crowdsourcing}, using the median area of airways, segmented by the crowd~\cite{cheplygina2016early}, clustering locations of corresponding points in images ~\cite{maier2015crowdtruth}. \veronika{easy, segmentation}
+
+ However, in the domain of medical images, the question of what latent factors are relevant to weight different people's opinions is begged given that most members of the crowd are not likely to have expertise in reviewing medical images. Traditional approaches like majority voting rely on the assumption that each rater is going to be correct at least 50\% of the time (the Condorcet theorem). If this does not hold, as could happen with diagnosis (rather than segmentation) of images, the aggregated decision is not going to converge to the ground truth.
+
+  Judging worker quality using gold questions could be unrealistic in the medical domain because experts are too busy to contribute (chicken-egg problem of why crowdsourcing is employed in the first place), a truth may be even be difficult for experts to agree on, and exemplar data is rare.  
+  
+  Another issue is that the way experts annotate the data could not be feasible in a crowd setting, and the task when decomposed, would not be logical for experts. For example when annotating lung images, experts work with software that allows 3D manipulation of images. Several existing medical imaging studies however, decompose the task, by extracting 2D slices~\cite{oneil2017crowdsourcing,orting2017crowdsourced} or patches~\cite{cheplygina2016early} from the images. This allows using such images in traditional crowdsourcing platforms and possibly simplifies the task for the crowd, but would not be the way experts actually judge images, where they might rely on more contextual and 3D information. 
+    
+%existing terminology can be inaccessible to use when providing instructions to lay people,
+
+%Bad work is a result of poor task design (intrinsic to what is provided... content level; latent variable of quality; properties of item affects quality of output); enforcing a process that maximizes chances for good output; post-hoc estimation of crowd work; quality improvement process of attaching a value to a particular item
+
+\emph{Suggestions:}
+
+%Ioanna & Panos
+\subsection{Task Assignment}
+\emph{Motivation:} 
+
+\emph{Traditional approach:}
+
+\emph{Challenges for traditional approach from medical images:} 
+
+\emph{Suggestions:}
+
+% Danna
+\subsection{Privacy}
+\emph{Motivation:} 
+
+\emph{Traditional approach:}
+
+\emph{Challenges for traditional approach from medical images:} 
+
+\emph{Suggestions:}
+
+% Chris, Anisha, Ioanna; Kristy?
+\subsection{Ethics}
+\emph{Motivation:} 
+
+\emph{Traditional approach:}
+
+\emph{Challenges for traditional approach from medical images:} 
+
+\emph{Suggestions:}
+
+% Lora
+\section{Discussion}
+Identifying defining features for crowdsourcing medical images and tapping into existing landscape and see who meets those needs or what we should do to meet those needs. What is reusable, adaptable, and unique?  We expect quite a bit of overlap.  
+
+Unique goals:
+\begin{itemize}
+\item Help the development of cures for diseases that are rare
+\item Help alleviate human isolation due to rare disease
+\end{itemize}
+
+% Ioanna knows something and can offer comments about this
+\subsection{Intellectual Property Rights}
+
+\subsection{Private Data (need to create trust)}
+\begin{itemize}
+    \item Impact of visibility of data; only behind firewall, onsite location
+    \item People are willing to share their data
+\end{itemize}
+
+\subsection{Limited Datasets}
+\begin{itemize}
+    \item Typically rare data events
+    \item Data holders: pharmaceuticals, hospitals, and patients
+    \item Challenge to curate large datasets (e.g., PeopleLikeMe aggregates sample population)
+\end{itemize}
+
+\subsection{Cross-Domain Synergies}
+\begin{itemize}
+    \item Have new layers built on existing crowdsourcing layers that already exist
+\end{itemize}
+
+\subsection{Digital Health}
+\begin{itemize}
+    \item OpenHumans
+\end{itemize}
+
+\subsection{Privacy and Ethics}
+\begin{itemize}
+    \item   Ethical and Privacy Aspects of Using Medical Image Data %https://www.researchgate.net/publication/317802003_Ethical_and_Privacy_Aspects_of_Using_Medical_Image_Data 
+\end{itemize}
+
+\subsection{Science Communication}
+\begin{itemize}
+    \item   Opportunity to engage communities
+    \item   Enhance public scientific literacy
+    \item   Enhance trust in science 
+    \item   Conversely, poorly designed studies may erode public trust in science - researchers may need to be particularly mindful of this in the medical domain, where the crowd may be more personally invested than in other domains e.g. ecology or astronomy) and with the risk of medical and privacy related scandals
+    \item   May provide an opportunity to gather more diverse opinions on medical research - and hence contribute to research through influencing research aims and goals 
+\end{itemize}
+
+\section{What's Next?}
+
+\section{Conclusion}
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{egbib,refs_veronika}
+%refs_veronika is an external file from Veronika's Dropbox, you can link your own existing bibliography like this: https://veronikach.com/phd-advice/multiple-overleaf-projects-with-a-single-bib-file/
+}
+
+
+\end{document}
