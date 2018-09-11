@@ -443,53 +443,73 @@ After understanding the type of problem one wants to solve, one can then define 
 
 % Danna & Matthias & Veronika
 \subsection{Quality Control}
-\emph{Motivation:} Ensuring the work of the crowd can be trusted is a well-studied challenge in the crowdsourcing community~\cite{daniel2018quality}.  
+%\emph{Motivation:}
 
-\emph{Traditional approach:}
+Ensuring the work of the crowd can be trusted is a well-studied challenge in the crowdsourcing community~\cite{daniel2018quality}.
+However, quality control in crowdsourcing is quite challenging, due to the various factors that influence the quality of a task result, including the skill set of the worker, her motivation and diligence, but also the difficulty of the task itself or the clarity of the task instructions. 
 
-Classical techniques often rely on some form of \emph{aggregation}, resolving how to maximize the chance for a good output using differing weighting schemes to combine results from multiple crowd workers. \veronika{Describe some common techniques for aggregation, e.g. simple aggregation with voting vs assigning weights to raters (global weight)}. 
+%\emph{Traditional approach:}
 
-Alternatively, many techniques help judge \emph{worker quality} towards helping uncover the best-fitting workers for each task. (Local weight per rater/task) The common approach of to employ gold questions.
+Classical techniques often rely on some form of \emph{aggregation}, resolving how to maximize the chance for a proper output using different weighting schemes to combine results from multiple crowd workers.
+These schemes can range from very simple majority voting \matthias{add citation} to sophisticated per rater weights that also consider the rater's expertise for the specific task \matthias{add citation}. 
 
-Preselection of workers (like approval rate from previous tasks) - can describe here what typical recommendations are
+\veronika{Describe some common techniques for aggregation, e.g. simple aggregation with voting vs assigning weights to raters (global weight)}. 
+\matthias{I think this very basic example might be enough to keep the section short.}
+
+Alternatively, many techniques help judge \emph{worker quality} towards helping uncover the best-fitting workers for each task. \veronika{(Local weight per rater/task)}
+The typical approach is to employ gold questions or to perform tutorials and qualification test before the actual task.
+Additionally, many crowdsourcing platforms provide some information about the work history of users that can also help in the preselection of workers, e.g., based on the approval rate from previous tasks.
+
+Besides a weighted aggregation also statistical methodologies are available to identify random submissions~\cite{kim2012filter} or to aggregate the worker's ratings~\cite{ribeiro2011crowdmos}.
+In line with these approaches are also methodologies that apply adaptive learning to collect more worker ratings for uncertain items~\cite{yang2018leveraging}.
 
 \veronika{What is content quality, task quality?}
 
-\emph{Control Process}:
-\begin{itemize}
-    \item Screening of worker behavior,e.g., measuring completion time, monitoring interactions with the task interface\cite{hirth2014predicting, kazai2016quality, mok2017detecting, goyal2018your}
-    \item Consistency checks, attention tests, variable amount of work (Gardlo), trap questions
-\end{itemize}
+Instead of using the actual task result or information about the previous performance of a worker, it is also possible to collect meta-information about the way the worker behaves while performing the task.
+This meta information, like the task completion times or the interactions with the task interface, or can again be used to get an estimate about the quality of the task result\cite{hirth2014predicting, kazai2016quality, mok2017detecting, goyal2018your}.
 
 
-\emph{Workflows}
-\begin{itemize}
-    \item Crowdsourcing workflows (find-fix-verify)
-    \item Statistical post-processing/reliability checks
-    \item two-stage design
-    \item adaptive learning
-\end{itemize}
+%\emph{Control Process}:
+%\begin{itemize}
+%    \item Screening of worker behavior,e.g., measuring completion time, monitoring interactions with the task interface\cite{hirth2014predicting, kazai2016quality, mok2017detecting, goyal2018your}
+%    \item Consistency checks, attention tests, variable amount of work (Gardlo), trap questions
+%\end{itemize}
 
+Moreover, it is also possible to build complex workflows that help in controlling the quality of the crowdsourcing results.
+Examples are two-step designs~\cite{hossfeld2014best} that consist of an easy and fast to complete training and testing task to find suitable workers, followed by a complex task that generates the actual desired result, workflows including automated processing steps \matthias{We could use https://www.cloudfactory.com/ as example if we do not find another suitable reference}, or design patterns like find-fix-verify~\cite{bernstein2010soylent} and map-reduce~\cite{kittur2011crowdforge}.
 
-Probably good to mention active learning here
+%\emph{Workflows}
+%\begin{itemize}
+%    \item Crowdsourcing workflows (find-fix-verify)
+%    \item Statistical post-processing/reliability checks
+%    \item two-stage design
+%    \item adaptive learning
+%\end{itemize}
+
 
 %http://www.programthecrowd.com/schedule
 
-\emph{Challenges for traditional approach from medical images:} 
+%\emph{Challenges for traditional approach from medical images:} 
 
 A common challenge is that it the expertise of the crowd is likely different from experts. Traditional approaches are still often used with good results, for example using majority vote to decide on a consensus segmentation of abnormalities in lung images~\cite{oneil2017crowdsourcing}, using the median area of airways, segmented by the crowd~\cite{cheplygina2016early}, clustering locations of corresponding points in images ~\cite{maier2015crowdtruth}. \veronika{easy, segmentation}
 
  However, in the domain of medical images, the question of what latent factors are relevant to weight different people's opinions is begged given that most members of the crowd are not likely to have expertise in reviewing medical images. Traditional approaches like majority voting rely on the assumption that each rater is going to be correct at least 50\% of the time (the Condorcet theorem). If this does not hold, as could happen with diagnosis (rather than segmentation) of images, the aggregated decision is not going to converge to the ground truth.
 
-  Judging worker quality using gold questions could be unrealistic in the medical domain because experts are too busy to contribute (chicken-egg problem of why crowdsourcing is employed in the first place), a truth may be even be difficult for experts to agree on, and exemplar data is rare.  
+  Judging worker quality using gold questions could be unrealistic in the medical domain because experts are too busy to contribute (chicken-egg problem of why crowdsourcing is employed in the first place), a truth may even be difficult for experts to agree on, and exemplary data is rare.  
   
-  Another issue is that the way experts annotate the data could not be feasible in a crowd setting, and the task when decomposed, would not be logical for experts. For example when annotating lung images, experts work with software that allows 3D manipulation of images. Several existing medical imaging studies however, decompose the task, by extracting 2D slices~\cite{oneil2017crowdsourcing,orting2017crowdsourced} or patches~\cite{cheplygina2016early} from the images. This allows using such images in traditional crowdsourcing platforms and possibly simplifies the task for the crowd, but would not be the way experts actually judge images, where they might rely on more contextual and 3D information. 
+  Another issue is that the way experts annotate the data could not be feasible in a crowd setting, and the task when decomposed, would not be logical for experts. For example, when annotating lung images, experts work with software that allows 3D manipulation of images.
+  
+  
+% \emph{Suggestions:}
+Several existing medical imaging studies, however, decompose the task, by extracting 2D slices~\cite{oneil2017crowdsourcing,orting2017crowdsourced} or patches~\cite{cheplygina2016early} from the images. This decomposition allows using such images in traditional crowdsourcing platforms and possibly simplifies the task for the crowd, but would not be the way experts judge images, where they might rely on more contextual and 3D information.
+Additionally, it is possible to create crowdsourcing workflows that interconnect which need to perform by experts and task that can be crowdsourcing to the masses, e.g., multiple workers might contribute to a pre-segmentation of graphical data and experts only review relevant parts of the image.
+Finally, methodologies used in subjective crowdsourcing assessments, like Quality of Experience evaluations~\cite{hossfeld2014best}, and worker monitoring techniques mentioned above can also be partially applied to assess the goodwill and diligence of the worker, if the task result cannot be compared to ground truth data.  
+
     
 %existing terminology can be inaccessible to use when providing instructions to lay people,
 
 %Bad work is a result of poor task design (intrinsic to what is provided... content level; latent variable of quality; properties of item affects quality of output); enforcing a process that maximizes chances for good output; post-hoc estimation of crowd work; quality improvement process of attaching a value to a particular item
 
-\emph{Suggestions:}
 
 %Ioanna & Panos
 \subsection{Task Assignment}
