@@ -341,26 +341,27 @@ Similarly, users participating in initiatives like OpenHumans or PatientsLike an
 \subsection{Task Meta-Type}
 %\emph{Motivation:} 
 Crowdsourcing has found application in a multitude of areas.
-Tasks can vary from simple microtasks inducing categorization and annotation of content to solving of complex research and development challenges~\footnote{https://www.innocentive.com/} and, consequently, tasks also very significantly with respect to the required skill set of the workers and the required equipment for completing the tasks.
-Even if we only focus on non-research and non-creativity related tasks, crowdsourcing tasks can still have very different input data types, work requirement and outputs, e.g., content labeling, image segmentation or text transcription.
-Still most of them can be subsumed in four, more generic meta-task types that share common properties in terms of the in- and output of the task and the way the data is process.
+Tasks can vary from simple microtasks inducing categorization and annotation of content to solve of sophisticated research and development challenges~\footnote{https://www.innocentive.com/} and, consequently, tasks also vary significantly concerning the required skill set of the workers and the required equipment for completing the tasks.
+Even if we only focus on non-research and non-creativity related tasks, crowdsourcing tasks can still have very different input data types, work requirement, and outputs, e.g., content labeling, image segmentation or text transcription.
+Still, most of them can be subsumed in four, more generic meta-task types that share common properties regarding the in- and output of the task and the way the data is processed.
 The first generic task type is \emph{meta-data provisioning}.
-This subsumes all tasks the ask workers to provide additional information to a given piece of data.
-Examples are images that need to be categorizes, i.e., a category information is added by the worker, transcription of text from an image, textual information is added to the visual data, segmentation of images, bounding information is added to the visual data, or even the translation of a text, addition (translated) text is added to the existing text data.
+This type subsumes all tasks that ask workers to provide additional information to a given piece of data.
+Examples are images that need to be categorized, i.e., a category information is added by the worker, transcription of text from an image, textual information is added to the visual data, segmentation of images, bounding information is added to the visual data, or even the translation of a text, addition (translated) text is added to the existing text data.
 Another common task type is \emph{verification}. 
-Task belonging to this category aim at increasing the data quality of the task result by letting workers rank given meta-data according to their quality or rechecking submitted meta-data~\matthias{@Javed: I cannot remember what was the initial intention of this task type. Please revise this part.}.
+Tasks belonging to this category aim at increasing the data quality of the task result by letting workers rank given meta-data according to their quality or rechecking submitted meta-data~\matthias{@Javed: I cannot remember what was the initial intention of this task type. Please revise this part.}.
 The last generic task type that is commonly found in traditional crowdsourcing is \emph{consolidation}.
 Here, workers are asked to merge different data sets that cannot be processed or aligned automatically or workers are asked to pre-process existing data for later automatic evaluation.
-This might include images that show the same object from different angles, data records in databases that can be merged if inference is used, or normalizing data to predefined concepts.
+This type might include images that show the same object from different angles, data records in databases that can be merged if inference is used, or normalizing data to predefined concepts.
 
 Meta-data provisioning, verification, and consolidation can all also be found in the context of medical imaging.
-Here, also most of the existing literature on theses topics can be reused.
-However, in contrast to other crowdsourcing applications, \emph{data provisioning} can play a major role in the medial field.
+Here, also most of the existing literature on these topics can be reused.
+However, in contrast to other crowdsourcing applications, \emph{data provisioning} can play a significant role in the medical field.
 Other than meta-data provisioning, we use \emph{data provisioning} to refer to tasks that aim at collecting (bio-medical) from the worker itself.
 This can include measurable parameters, like heart rate, blood pressure, weight, but also subjective impressions, like well-being or level of stress.
-In contrast to other task types, the information collected here are highly sensitive and personal.
-On the one hand, this implies that a strong anonymization is required to prevent negative on the other had research might require to have a traceable user id across multiple studies.
-Additionally, ethical issues might arise from the anonymization of the data, e.g. if a disease is detected in the later evaluation the patient cannot be informed about it.
+In contrast to other task types, the information collected here is highly sensitive and personal.
+On the one hand, this implies that strong anonymization is required to prevent a negative impact on the patient.
+On the other hand, research might require to have a traceable user id across multiple studies.
+Additionally, ethical issues might arise from the anonymization of the data, e.g., if a disease is detected in the later evaluation the patient cannot be informed about it.
 
 
 %\emph{Traditional approach:}
